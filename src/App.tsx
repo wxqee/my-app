@@ -1,8 +1,15 @@
 import React from 'react';
+import {withNamespaces} from 'react-i18next';
 import logo from './logo.svg';
 import './App.css';
 
-const App: React.FC = () => {
+const App = (props: any) => {
+  const { t, tReady } = props;
+
+  if (!tReady) {
+    return <div>{t('common:LOADING')}</div>
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -16,11 +23,11 @@ const App: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          {t('LEARN_REACT')}
         </a>
       </header>
     </div>
   );
-}
+};
 
-export default App;
+export default withNamespaces(['app', 'common'])(App);
